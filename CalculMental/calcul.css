@@ -1,0 +1,16 @@
+#minuteur{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.showPlayingDiv{
+    display: none;
+}
+
+.goodAnswer{
+    color:green;
+}
+
+.badAnswer{
+    color:red;
+}
