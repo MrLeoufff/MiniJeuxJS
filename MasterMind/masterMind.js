@@ -1,6 +1,6 @@
 /**
  * 
- * TODO LIST
+ * 
  * 
  * OK Générer la combinaison secrète (4 couleurs)
  *    Pouvoir proposer une combinaison
@@ -17,85 +17,73 @@ const allSelectDiv = document.getElementById("allSelect");
 let colorTabToFind = null;
 const nbColorToFind = 4;
 
-document.getElementById("startButton").addEventListener("click", ()=> {
+document.getElementById("startButton").addEventListener("click", () => {
     launchGame();
 });
 
-function launchGame(){
+function launchGame() {
     setAleaColorTab();
-    //Afficher le tableau à trouver en console.
+    // Afficher le tableau à trouver en console.
     console.log(colorTabToFind);
-    allSelectDiv.innerHTML = "";
+    allSelectDiv.innerHTML = ""; // Clear previous content safely
     generateLineSelect();
 }
 
-
-function checkProposition(){
+function checkProposition() {
     let allSelect = allSelectDiv.querySelectorAll("select");
-    let propal = Array.from(allSelect, select => select.value).slice(0-nbColorToFind);
+    let propal = Array.from(allSelect, select => select.value).slice(0 - nbColorToFind);
 
     let cptGoodPlace = 0;
     let cptBadPlace = 0;
-    //Fait une copie du tableau (spread operator)
-    let colorToFindCopy = [...colorTabToFind];
-    
-    //ON parcours le tableau de propositions
-    //Pour vérifier les éléments bien placés
+    let colorToFindCopy = [...colorTabToFind]; // Copy of the color array to modify during checks
+
+    // Check for correct positions
     for (let i = 0; i < propal.length; i++) {
-        //On compare avec la couleur dans le tableau masqué, au même endroit
-        if(propal[i] == colorToFindCopy[i]){
-            //La proposition est bonne
-            //Bonne couleur au bon endroit
+        if (propal[i] === colorToFindCopy[i]) {
             cptGoodPlace++;
-            colorToFindCopy[i] = "trouvé";
-            propal[i] = "trouvéCotePropal";
+            colorToFindCopy[i] = "found";
+            propal[i] = "foundInPropal";
         }
     }
 
-    //ON parcours le tableau de propositions
-    //Pour vérifier les éléments de la bonne couleur mais mal placés
+    // Check for correct colors in wrong positions
     for (let i = 0; i < propal.length; i++) {
-        //On compare avec la couleur dans le tableau masqué, au même endroit
-        if(propal[i] != "trouvéCotePropal"){
-            let finded = false;
+        if (propal[i] !== "foundInPropal") {
+            let found = false;
             colorToFindCopy.forEach((color, index) => {
-                if(!finded){
-                    if(propal[i] == color){
-                        cptBadPlace++;
-                        propal[i] = "trouvéCotePropal";
-                        colorToFindCopy[index] = "trouvé";
-                        finded = true;
-                    }
+                if (!found && propal[i] === color) {
+                    cptBadPlace++;
+                    propal[i] = "foundInPropal";
+                    colorToFindCopy[index] = "found";
+                    found = true;
                 }
             });
         }
     }
 
-    //Ajout de la ligne de message de points
+    // Add the feedback message
     let lineResponse = document.createElement("div");
-    lineResponse.innerText = "Bon endroit :"+cptGoodPlace+" | Mauvais endroit:"+cptBadPlace;
+    lineResponse.textContent = `Bon endroit : ${cptGoodPlace} | Mauvais endroit : ${cptBadPlace}`;
     allSelectDiv.appendChild(lineResponse);
 
-    //Si on a autant de bonne de réponses que de cases dans mon tableau
-    //secret, on a gagné
-    if(cptGoodPlace == colorTabToFind.length){
+    // Check for win condition
+    if (cptGoodPlace === colorTabToFind.length) {
         Confetti.launchAnimationConfeti();
-        setTimeout(() =>{
+        setTimeout(() => {
             Confetti.stopAnimationConfeti();
         }, 5000);
+    } else {
+        generateLineSelect(); // Generate a new line of selects if the game continues
     }
-
-    //On génère des nouveaux select
-    generateLineSelect();
 }
 
-function generateLineSelect(){
+function generateLineSelect() {
     let line = document.createElement("div");
     for (let index = 0; index < nbColorToFind; index++) {
         generateSelect(line);
     }
     let btn = document.createElement("button");
-    btn.innerText = "OK";
+    btn.textContent = "OK";
     line.appendChild(btn);
     btn.addEventListener("click", () => {
         checkProposition();
@@ -103,33 +91,31 @@ function generateLineSelect(){
     allSelectDiv.appendChild(line);
 }
 
-function generateSelect(target){
+function generateSelect(target) {
     let mySelect = document.createElement("select");
     colors.forEach(color => {
         let colorOption = document.createElement("option");
-        //colorOption.innerHTML = color;
         colorOption.value = color;
         colorOption.style.backgroundColor = color;
+        colorOption.textContent = color; // Display color name in the select
         mySelect.appendChild(colorOption);
     });
     mySelect.style.backgroundColor = mySelect.value;
 
-    mySelect.addEventListener("change", (e)=> {
-        console.log(e.target.value);
+    mySelect.addEventListener("change", (e) => {
         e.target.style.backgroundColor = e.target.value;
     });
     target.appendChild(mySelect);
 }
 
-function setAleaColorTab(size = 4){
+function setAleaColorTab(size = nbColorToFind) {
     colorTabToFind = [];
     for (let index = 0; index < size; index++) {
         colorTabToFind.push(getAleaColor());
     }
 }
 
-function getAleaColor(){
+function getAleaColor() {
     let aleaIndex = Utils.getRandomInt(colors.length);
-    let aleaColor = colors[aleaIndex];
-    return aleaColor;
+    return colors[aleaIndex];
 }

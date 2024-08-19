@@ -20,10 +20,10 @@ const showPlayingDiv = document.querySelectorAll(".showPlayingDiv");
 const nbSecondsGameInput = document.getElementById("nbSecondsGame");
 const maxNumberCalcInput = document.getElementById("maxNumberCalc");
 
-let TempsMinuteurBase = 10;//paramétrable
-let maxCalculNumber = 20;//Paramétrable
+let TempsMinuteurBase = 10; // Paramétrable
+let maxCalculNumber = 20; // Paramétrable
 let compteurInterval = null;
-let TempsRestant =0;
+let TempsRestant = 0;
 let calculEncours = null;
 let cptGoodAnswer = 0;
 let cptBadAnswer = 0;
@@ -34,84 +34,97 @@ document.getElementById("validPropal").addEventListener("click", () => {
 });
 
 propalInput.addEventListener("keyup", event => {
-    if(event.key == 'Enter'){
+    if (event.key === 'Enter') {
         checkInputValue();
     }
 });
 
-function checkInputValue(){
-    if(propalInput.value == calculEncours.result){
-        messengerDiv.innerText="Bravo, vous avez trouvé";
+function checkInputValue() {
+    if (parseInt(propalInput.value) === calculEncours.result) {
+        messengerDiv.textContent = "Bravo, vous avez trouvé !";
         cptGoodAnswer++;
-        allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="goodAnswer">${propalInput.value}</span> <br/>`;
-    }
-    else{
-        messengerDiv.innerText=`Ce n'est pas le résultat ${calculEncours.showCalculWithResult}`;
-        cptBadAnswer ++;
-        allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="badAnswer">${propalInput.value}</span> <br/>`;
+        allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="goodAnswer">${propalInput.value}</span><br/>`;
+    } else {
+        messengerDiv.textContent = `Ce n'est pas le bon résultat : ${calculEncours.showCalculWithResult}`;
+        cptBadAnswer++;
+        allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="badAnswer">${propalInput.value}</span><br/>`;
     }
     propalInput.value = "";
     generateCalcul();
 }
 
-function launchGame(){
-    if(nbSecondsGameInput.value != undefined){
-        TempsMinuteurBase = nbSecondsGameInput.value;
+function launchGame() {
+    if (nbSecondsGameInput.value) {
+        TempsMinuteurBase = parseInt(nbSecondsGameInput.value);
     }
 
-    if(maxNumberCalcInput.value != undefined){
-        maxCalculNumber = maxNumberCalcInput.value;
+    if (maxNumberCalcInput.value) {
+        maxCalculNumber = parseInt(maxNumberCalcInput.value);
     }
 
     allCalculRecap = "";
     cptGoodAnswer = 0;
     cptBadAnswer = 0;
-    messengerDiv.innerHTML = "";
+    messengerDiv.textContent = ""; // Vider le message précédent
     lancerMinuteur(TempsMinuteurBase);
     generateCalcul();
     displayPlayingDiv(true);
 }
 
-function generateCalcul(){
+function generateCalcul() {
     calculEncours = new Calcul(maxCalculNumber);
-    calculDiv.innerText = calculEncours.showCalcul;
+    calculDiv.textContent = calculEncours.showCalcul;
 }
 
-function lancerMinuteur(tempsMinuteurBase){
+function lancerMinuteur(tempsMinuteurBase) {
     clearInterval(compteurInterval);
     TempsRestant = tempsMinuteurBase;
-    reboursDiv.innerText = TempsRestant;
+    reboursDiv.textContent = TempsRestant;
     compteurInterval = setInterval(() => {
-        //Le code ici va s'éxécuter toutes les 1 seconde
-        TempsRestant --;
-        reboursDiv.innerText = TempsRestant;
-        if(TempsRestant == 0){
+        TempsRestant--;
+        reboursDiv.textContent = TempsRestant;
+        if (TempsRestant === 0) {
             clearInterval(compteurInterval);
             displayPlayingDiv(false);
-            messengerDiv.innerHTML = `Bonne(s) réponse(s) : ${cptGoodAnswer} <br/>`;
-            messengerDiv.innerHTML += `Mauvais(s) réponse(s) : ${cptBadAnswer} <br/>`;
 
-            let totalQuestions = cptBadAnswer + cptGoodAnswer;
-            let pourcentageGoodAnswer =  100 * cptGoodAnswer/totalQuestions;
+            // Construction du message final
+            const message = document.createElement('div');
+            const goodAnswers = document.createElement('p');
+            goodAnswers.textContent = `Bonne(s) réponse(s) : ${cptGoodAnswer}`;
+            message.appendChild(goodAnswers);
 
-            messengerDiv.innerHTML += `Ratio : ${pourcentageGoodAnswer}% <br/>`;
-            messengerDiv.innerHTML += allCalculRecap;
+            const badAnswers = document.createElement('p');
+            badAnswers.textContent = `Mauvaise(s) réponse(s) : ${cptBadAnswer}`;
+            message.appendChild(badAnswers);
+
+            const totalQuestions = cptBadAnswer + cptGoodAnswer;
+            const pourcentageGoodAnswer = (100 * cptGoodAnswer / totalQuestions).toFixed(2);
+
+            const ratio = document.createElement('p');
+            ratio.textContent = `Ratio : ${pourcentageGoodAnswer}%`;
+            message.appendChild(ratio);
+
+            // Ajouter le récapitulatif des calculs
+            const recapDiv = document.createElement('div');
+            recapDiv.innerHTML = allCalculRecap; // Utilisation sécurisée car allCalculRecap est construit avec du contenu contrôlé
+            message.appendChild(recapDiv);
+
+            // Afficher le message dans messengerDiv
+            messengerDiv.textContent = ''; // Vider le contenu précédent
+            messengerDiv.appendChild(message);
         }
     }, 1000);
 }
 
-function displayPlayingDiv(show){
-    let displayProperty = "none";
-    if(show){
-        displayProperty = "block"
-    }
-
+function displayPlayingDiv(show) {
+    let displayProperty = show ? "block" : "none";
     showPlayingDiv.forEach(element => {
         element.style.display = displayProperty;
     });
 }
+
 class Calcul {
-    #operators = ['*', '-', '+']; 
+    #operators = ['*', '-', '+'];
     nombre1;
     nombre2;
     operator;
@@ -122,15 +135,15 @@ class Calcul {
         this.operator = this.#operators[this.#getRandomInt(3)];
     }
 
-    get result(){
-        return eval(this.nombre1+this.operator+this.nombre2);
+    get result() {
+        return eval(`${this.nombre1}${this.operator}${this.nombre2}`);
     }
 
-    get showCalcul(){
+    get showCalcul() {
         return `${this.nombre1} ${this.operator} ${this.nombre2}`;
     }
 
-    get showCalculWithResult(){
+    get showCalculWithResult() {
         return `${this.showCalcul} = ${this.result}`;
     }
 
