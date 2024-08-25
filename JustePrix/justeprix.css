@@ -1,59 +1,148 @@
-
-body{
-    max-width: 500px;
-    margin:auto;
+body {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(145deg, #1f1c2c, #928dab);
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
 }
-.bandeau{
+
+.container,
+.section {
     width: 100%;
-    max-height: 267px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-#beginGame{
-    background-color: bisque;
-    padding: 15px;
+.btn-primary {
+    display: block;
+    margin: 20px auto;
+    border-radius: 50px;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    color: white;
+}
+
+.bandeau {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
     border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    /* S'assurer que l'image garde ses proportions */
 }
 
-.reboursDiv{
-    transition: 0.2s;
+
+#beginGame {
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    transition: transform 0.3s ease, background 0.3s ease;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: block;
+    margin: 20px auto;
+    /* Centrer le bouton */
+}
+
+
+#beginGame:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+}
+
+.reboursDiv {
     font-size: 20px;
     display: inline-block;
-    color:white;
     border-radius: 35px;
     padding: 15px;
     font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.reboursDiv.cool{
-    background-color:green;
+.reboursDiv.cool {
+    background-color: green;
 }
 
-.reboursDiv.warning{
-    background-color:coral;
+.reboursDiv.warning {
+    background-color: coral;
 }
 
-.reboursDiv.danger{
-    background-color:red;
+.reboursDiv.danger {
+    background-color: red;
     animation: suspens 1s infinite;
     padding: 7px 15px;
 }
 
-#GamePropalDiv{
-    display: none;;
+#GamePropalDiv {
+    display: none;
 }
 
 @keyframes suspens {
-    0%, 100%{
+
+    0%,
+    100% {
         transform: rotate(0deg);
         font-size: 20px;
     }
-    33%{
+
+    33% {
         transform: rotate(-30deg);
         font-size: 23px;
     }
-    66%{
+
+    66% {
         transform: rotate(30deg);
         font-size: 23px;
-    } 
+    }
+}
+
+input[type="number"],
+#checkPropalButton {
+    border-radius: 15px;
+    padding: 10px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+input[type="number"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#checkPropalButton {
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    color: white;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+#checkPropalButton:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+}
+
+#resultDiv {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+}
+
+.section {
+    background: inherit;
+    padding: 20px;
 }

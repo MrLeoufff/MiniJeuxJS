@@ -1,5 +1,5 @@
 /*
-TODO : 
+ 
     X Générer un mot aléatoire
     X Afficher le mot en masqué _ _ _ _ _ _ _
     X Pouvoir proposer des lettres
