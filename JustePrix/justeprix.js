@@ -30,20 +30,30 @@ document.getElementById("userPropalInput")
 
 function checkPropal() {
     let numberPropal = document.getElementById("userPropalInput").value;
+    resultDiv.classList.remove("result-visible", "result-more", "result-less");
+
     if (NumberToFind > numberPropal) {
-        resultDiv.textContent = "C'est plus ! ";
+        resultDiv.textContent = "C'est plus !";
+        resultDiv.classList.add("result-more", "result-visible");
         let audio = new Audio("audio/plus.mp3");
         audio.play();
     }
     else if (NumberToFind < numberPropal) {
-        resultDiv.textContent = "C'est moins ! ";
+        resultDiv.textContent = "C'est moins !";
+        resultDiv.classList.add("result-less", "result-visible");
         let audio = new Audio("audio/moins.mp3");
         audio.play();
     }
     else if (NumberToFind == numberPropal) {
-        resultDiv.textContent = "C'est gagné ! ";
+        resultDiv.textContent = "C'est gagné !";
+        resultDiv.classList.add("result-visible");
         endGame(true);
     }
+
+    // Réinitialiser l'animation après un délai
+    setTimeout(() => {
+        resultDiv.classList.remove("result-visible", "result-more", "result-less");
+    }, 2000);
 }
 
 function launchGame() {

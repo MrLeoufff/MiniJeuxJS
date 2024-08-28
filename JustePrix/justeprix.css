@@ -1,6 +1,5 @@
 body {
-    max-width: 600px;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(145deg, #1f1c2c, #928dab);
@@ -9,8 +8,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     text-align: center;
+    flex-direction: column;
 }
 
 .container,
@@ -20,6 +19,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .btn-primary {
@@ -29,18 +29,19 @@ body {
     padding: 10px 20px;
     background: linear-gradient(to right, #0072ff, #00c6ff);
     color: white;
+    text-align: center;
 }
 
 .bandeau {
     width: 100%;
+    max-width: 100%;
     height: auto;
     max-height: 300px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     object-fit: cover;
-    /* S'assurer que l'image garde ses proportions */
+    margin: 20px 0;
 }
-
 
 #beginGame {
     background: linear-gradient(to right, #0072ff, #00c6ff);
@@ -53,9 +54,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: block;
     margin: 20px auto;
-    /* Centrer le bouton */
+    text-align: center;
 }
-
 
 #beginGame:hover {
     transform: translateY(-5px) scale(1.05);
@@ -69,6 +69,7 @@ body {
     padding: 15px;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 .reboursDiv.cool {
@@ -114,6 +115,7 @@ input[type="number"],
     padding: 10px;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 input[type="number"] {
@@ -132,17 +134,79 @@ input[type="number"] {
     background: linear-gradient(to right, #00c6ff, #0072ff);
 }
 
+
 #resultDiv {
     margin-top: 20px;
-    font-size: 1.2em;
+    font-size: 2em;
+    /* Augmente la taille du texte */
+    text-align: center;
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    opacity: 1;
+    /* Commence transparent */
+    transform: scale(0.8);
+    /* Commence petit */
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
+
+.result-visible {
+    opacity: 1;
+    /* Rendre visible */
+    transform: scale(1);
+    /* Revenir à la taille normale */
+}
+
+.result-more {
+    background-color: orange;
+    animation: bounceMore 1s infinite;
+}
+
+.result-less {
+    background-color: lightblue;
+    animation: bounceLess 1s infinite;
+}
+
+@keyframes bounceMore {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes bounceLess {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
 
 .container {
     padding: 0;
     margin: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .section {
     background: inherit;
     padding: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
