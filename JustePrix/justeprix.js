@@ -1,110 +1,99 @@
-//Générer un chiffre en aléatoire
-//L'utilisateur fera des propositions
-//Continuer tant qu'il n"a pas la bonne proposition
 import { Confetti } from "../lib/confetti.js";
 import { Utils } from "../lib/Utils/utils.js";
 
+// Variables globales
 let NumberToFind = 0;
 const resultDiv = document.getElementById("resultDiv");
 const reboursDiv = document.getElementById("CompteARebours");
 const GamePropalDiv = document.getElementById("GamePropalDiv");
+const playButton = document.getElementById("beginGame");
 let TempsRestant = 0;
 let compteurInterval = null;
 
-document.getElementById("beginGame")
-    .addEventListener("click", function () {
-        launchGame();
-    });
-
-document.getElementById("checkPropalButton")
-    .addEventListener("click", function () {
+// Événements
+playButton.addEventListener("click", launchGame);
+document.getElementById("checkPropalButton").addEventListener("click", checkPropal);
+document.getElementById("userPropalInput").addEventListener("keyup", function (event) {
+    if (event.key === 'Enter') {
         checkPropal();
-    });
+    }
+});
 
-document.getElementById("userPropalInput")
-    .addEventListener("keyup", function (event) {
-        if (event.key == 'Enter') {
-            checkPropal();
-        }
-    });
-
+// Fonctions
 function checkPropal() {
-    let numberPropal = document.getElementById("userPropalInput").value;
+    const numberPropal = parseInt(document.getElementById("userPropalInput").value);
+    if (isNaN(numberPropal)) {
+        resultDiv.textContent = "Veuillez entrer un nombre valide.";
+        resultDiv.classList.add("result-visible");
+        return;
+    }
+
     resultDiv.classList.remove("result-visible", "result-more", "result-less");
 
     if (NumberToFind > numberPropal) {
         resultDiv.textContent = "C'est plus !";
         resultDiv.classList.add("result-more", "result-visible");
-        let audio = new Audio("audio/plus.mp3");
-        audio.play();
-    }
-    else if (NumberToFind < numberPropal) {
+        new Audio("audio/plus.mp3").play();
+    } else if (NumberToFind < numberPropal) {
         resultDiv.textContent = "C'est moins !";
         resultDiv.classList.add("result-less", "result-visible");
-        let audio = new Audio("audio/moins.mp3");
-        audio.play();
-    }
-    else if (NumberToFind == numberPropal) {
+        new Audio("audio/moins.mp3").play();
+    } else {
         resultDiv.textContent = "C'est gagné !";
         resultDiv.classList.add("result-visible");
         endGame(true);
     }
 
-    // Réinitialiser l'animation après un délai
     setTimeout(() => {
         resultDiv.classList.remove("result-visible", "result-more", "result-less");
     }, 2000);
+
+    document.getElementById("userPropalInput").value = "";
 }
 
 function launchGame() {
+    playButton.style.display = "none";
     Confetti.stopAnimationConfeti();
     NumberToFind = Utils.getRandomInt(1000);
     TempsRestant = 30;
-    GamePropalDiv.style.display = "block";
+    GamePropalDiv.style.display = "flex";  // 'block' remplacé par 'flex' pour être cohérent avec le CSS
     if (compteurInterval != null) {
         clearInterval(compteurInterval);
     }
-    compteurInterval = setInterval(() => {
-        reboursDiv.innerText = TempsRestant;
-        TempsRestant--;
+    compteurInterval = setInterval(updateCountdown, 1000);
+}
 
-        if (TempsRestant >= 20) {
-            reboursDiv.classList.remove("warning");
-            reboursDiv.classList.remove("danger");
-            reboursDiv.classList.add("cool");
-        }
-        else if (TempsRestant > 10) {
-            reboursDiv.classList.remove("cool");
-            reboursDiv.classList.remove("danger");
-            reboursDiv.classList.add("warning");
-        }
-        else if (TempsRestant >= 0) {
-            reboursDiv.classList.remove("cool");
-            reboursDiv.classList.remove("warning");
-            reboursDiv.classList.add("danger");
-        }
-        else if (TempsRestant < 0) {
-            clearInterval(compteurInterval);
-            endGame(false);
-        }
+function updateCountdown() {
+    reboursDiv.innerText = TempsRestant;
+    TempsRestant--;
 
-    }, 1000);
+    if (TempsRestant >= 20) {
+        reboursDiv.className = "reboursDiv cool";
+    } else if (TempsRestant > 10) {
+        reboursDiv.className = "reboursDiv warning";
+    } else if (TempsRestant >= 0) {
+        reboursDiv.className = "reboursDiv danger";
+    } else {
+        clearInterval(compteurInterval);
+        endGame(false);
+    }
 }
 
 function endGame(gagne) {
     if (gagne) {
         Confetti.launchAnimationConfeti();
-        let audio = new Audio("audio/Bipbip.mp3");
-        audio.play();
+        new Audio("audio/Bipbip.mp3").play();
+        resultDiv.textContent = "C'est gagné !";
+        resultDiv.classList.add("result-visible");
         setTimeout(() => {
             Confetti.stopAnimationConfeti();
         }, 5000);
+    } else {
+        new Audio("audio/tes_mauvais_jack.mp3").play();
+        resultDiv.textContent = "Perdu !";
+        resultDiv.classList.add("result-visible");
     }
-    else {
-        let audio = new Audio("audio/tes_mauvais_jack.mp3");
-        audio.play();
-    }
+    playButton.style.display = "block";
     GamePropalDiv.style.display = "none";
     clearInterval(compteurInterval);
-
 }

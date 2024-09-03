@@ -34,9 +34,9 @@ body {
 
 .bandeau {
     width: 100%;
-    max-width: 100%;
     height: auto;
-    max-height: 300px;
+    max-width: 600px;
+    /* Limite la largeur de l'image */
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     object-fit: cover;
@@ -109,24 +109,54 @@ body {
     }
 }
 
-input[type="number"],
-#checkPropalButton {
-    border-radius: 15px;
+/* Conteneur pour aligner le formulaire avec l'image */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    /* Le conteneur prend toute la largeur possible, mais limitée */
+    margin: 0 auto;
+    /* Centrage */
+}
+
+/* Aligne l'input et le bouton "Go" avec la largeur de l'image */
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    /* Prend la même largeur que l'image */
+    margin: 10px auto;
+    gap: 10px;
+}
+
+#userPropalInput {
+    flex-grow: 1;
+    margin-bottom: 0;
+    height: 45px;
     padding: 10px;
+    border-radius: 15px;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
-input[type="number"] {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
 #checkPropalButton {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    height: 45px;
     background: linear-gradient(to right, #0072ff, #00c6ff);
     color: white;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
+    line-height: normal;
+    /* Centrer le texte à l'intérieur du bouton */
 }
 
 #checkPropalButton:hover {
@@ -134,27 +164,21 @@ input[type="number"] {
     background: linear-gradient(to right, #00c6ff, #0072ff);
 }
 
-
 #resultDiv {
     margin-top: 20px;
     font-size: 2em;
-    /* Augmente la taille du texte */
     text-align: center;
     color: white;
     padding: 15px;
     border-radius: 15px;
     opacity: 1;
-    /* Commence transparent */
     transform: scale(0.8);
-    /* Commence petit */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .result-visible {
     opacity: 1;
-    /* Rendre visible */
     transform: scale(1);
-    /* Revenir à la taille normale */
 }
 
 .result-more {
@@ -191,7 +215,7 @@ input[type="number"] {
     }
 }
 
-
+/* Styles supplémentaires */
 .container {
     padding: 0;
     margin: 0;
