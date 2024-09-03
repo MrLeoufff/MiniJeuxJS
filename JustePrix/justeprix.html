@@ -15,11 +15,16 @@
 
     <div class="content-wrapper">
         <img class="bandeau" src="img/juste-prix.jpg" alt="Le juste prix">
-        <button id="beginGame"><i class="fa-solid fa-play"></i></button>
+        <!-- Le bouton commence le jeu, on peut ajouter une gestion d'événements clavier -->
+        <button id="beginGame" onclick="launchGame()" onkeypress="if(event.key === 'Enter') launchGame()">
+            <i class="fa-solid fa-play"></i>
+        </button>
 
         <div id="GamePropalDiv" class="input-group">
             <input type="number" id="userPropalInput" />
-            <button id="checkPropalButton">Go</button>   
+            <button id="checkPropalButton" onclick="checkPropal()" onkeypress="if(event.key === 'Enter') checkPropal()">
+                Go
+            </button>   
         </div>
     </div>
 
@@ -27,7 +32,10 @@
 
     <div id="CompteARebours" class="reboursDiv"></div>
 
-    <a href="../index.html" class="btn btn-primary" role="button">Home</a>
+    <!-- Remplacement de <a> par <button> pour plus d'accessibilité -->
+    <button onclick="location.href='../index.html'" class="btn btn-primary">
+        Home
+    </button>
 
     <script type="module" src="justeprix.js"></script>
 </body>
