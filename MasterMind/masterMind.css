@@ -1,11 +1,8 @@
-/* Importation de Google Font Orbitron pour un style futuriste */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-/* Style global */
 body {
     font-family: 'Orbitron', sans-serif;
     background-color: #1a1a1a;
-    /* Fond sombre */
     color: #e0e0e0;
     text-align: center;
     padding: 10px;
@@ -13,7 +10,6 @@ body {
     padding-top: 20px;
 }
 
-/* Titre principal */
 h1 {
     color: #00e5ff;
     animation: glow 3s ease-in-out infinite;
@@ -38,7 +34,6 @@ h1 {
     }
 }
 
-/* Conteneur principal */
 main {
     max-width: 500px;
     margin: auto;
@@ -50,13 +45,11 @@ main {
     text-align: center;
 }
 
-/* Conteneur de chaque ligne de sélection avec barre de progression */
 .line-container {
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* Ligne des sélecteurs de couleur */
 .select-line {
     display: flex;
     justify-content: center;
@@ -65,7 +58,6 @@ main {
     margin-bottom: 10px;
 }
 
-/* Bouton de validation */
 .btn-validate {
     background-color: #6a00ff;
     color: #fff;
@@ -80,7 +72,6 @@ main {
     background-color: #00e5ff;
 }
 
-/* Barre de progression */
 .progress-bar {
     position: fixed;
     top: 0;
@@ -97,7 +88,6 @@ main {
 
 .progress {
     width: 100%;
-    /* Commence à 100% et diminue avec les tentatives */
     background: linear-gradient(90deg, #00e5ff, #6a00ff);
     height: 100%;
     transition: width 0.4s ease;
@@ -106,7 +96,6 @@ main {
 
 
 
-/* Bouton de démarrage */
 #startButton {
     background-color: #6a00ff;
     color: #e0e0e0;
@@ -131,12 +120,10 @@ select {
     transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
 }
 
-/* Sélecteurs de couleur pour les choix de MasterMind */
 select {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    /* Cercle */
     box-shadow: 0px 0px 8px #6a00ff;
     transition: transform 0.2s, box-shadow 0.3s;
 }
@@ -148,12 +135,10 @@ select:hover {
 
 select option {
     color: #1a1a1a;
-    /* Texte foncé sur fond clair pour contraste */
     background-color: #00e5ff;
     font-weight: bold;
 }
 
-/* Conteneur du clavier */
 #allSelect {
     display: flex;
     flex-wrap: wrap;
@@ -177,11 +162,9 @@ select option {
     box-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
 }
 
-/* Bouton de retour */
 .btn-home {
     display: inline-block;
     background-color: #ff007f;
-    /* Rose néon */
     color: white;
     padding: 8px 16px;
     border-radius: 8px;
@@ -197,11 +180,9 @@ select option {
     box-shadow: 0px 0px 15px #00e5ff, 0px 0px 25px #ff007f;
 }
 
-/* Styles pour les écrans plus larges */
 @media (min-width: 768px) {
     .progress-bar {
         height: 8px;
-        /* Réduit légèrement la hauteur sur mobile */
     }
 
     h1 {

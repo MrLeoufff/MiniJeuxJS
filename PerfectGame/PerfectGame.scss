@@ -1,56 +1,57 @@
 @use 'sass:math';
 @import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
-body{
+
+body {
     text-align: center;
     font-family: 'Play', sans-serif;
 }
-          
 
-#CardsPlateau{
+#CardsPlateau {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-#elementToFind{
+#elementToFind {
     width: 100px;
     padding: 10PX;
     border-radius: 10px;
     margin: 15px auto;
     border: 5px green solid;
     font-weight: bold;
-    color:red;
+    color: red;
     font-size: 25px;
-    .perso{
-        margin:auto;
+
+    .perso {
+        margin: auto;
     }
 }
 
-.perso{
+.perso {
     background: url("img/sprite-perso.png");
     width: 70px;
     height: 70px;
-    margin:10px;
-    
+    margin: 10px;
+
     @for $i from 0 through 24 {
-        &.perso#{$i}{
+        &.perso#{$i} {
             $left: $i*83.4px;
             $top: math.ceil(calc($i / 6)) * 76px;
             background-position: $left $top !important;
-    
-            &.hidden{
+
+            &.hidden {
                 background: url("img/interrogation.png");
                 background-position: 0 0 !important;
 
-                &:hover{
-                    cursor:pointer;
+                &:hover {
+                    cursor: pointer;
                     background-color: antiquewhite;
-                    border-radius:50px;
+                    border-radius: 50px;
                 }
-            }   
+            }
         }
     }
-    }
+}
 
 
 
@@ -68,12 +69,13 @@ body{
     z-index: 0;
     border-radius: 10px;
     margin-bottom: 15px;
+
     &:before {
         content: '';
         background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
         position: absolute;
         top: -2px;
-        left:-2px;
+        left: -2px;
         background-size: 400%;
         z-index: -1;
         filter: blur(5px);
@@ -81,16 +83,20 @@ body{
         height: calc(100% + 4px);
         animation: glowing 20s linear infinite;
         opacity: 0;
-    }    
+    }
+
     &:active {
         color: #000
     }
+
     &:after {
         background: transparent;
     }
+
     &:hover:before {
         opacity: 1;
     }
+
     &:after {
         z-index: -1;
         content: '';
@@ -105,12 +111,20 @@ body{
 }
 
 @keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
 }
-  
-  .tingle-modal-box__content {
+
+.tingle-modal-box__content {
     font-size: 40px;
     color: black;
     background-color: cadetblue;

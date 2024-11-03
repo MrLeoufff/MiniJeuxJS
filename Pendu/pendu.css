@@ -34,14 +34,12 @@ main {
     text-align: center;
 }
 
-/* Pour placer le bouton "Home" en dessous du conteneur */
 .btn-home-container {
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
 
-/* Titre */
 main h1 {
     color: #ff7518;
     font-size: 1.8em;
@@ -49,7 +47,6 @@ main h1 {
     text-shadow: 2px 2px 5px #000;
 }
 
-/* Sous-titre */
 main h2 {
     color: #f5f5f5;
     font-size: 1.2em;
@@ -57,12 +54,9 @@ main h2 {
     text-shadow: 1px 1px 3px #000;
 }
 
-/* Bouton de démarrage */
 #beginGame {
     background-color: #ff7518;
-    /* Couleur orange */
     color: #2c2c2c;
-    /* Texte sombre */
     border: none;
     padding: 8px 16px;
     font-size: 1em;
@@ -70,18 +64,14 @@ main h2 {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     margin: 20px auto;
-    /* Centrage avec auto */
     display: block;
-    /* Affichage en bloc pour le centrage */
 }
 
 #beginGame:hover {
     background-color: #cc5e00;
-    /* Couleur orange foncée */
     transform: scale(1.05);
 }
 
-/* Mot à deviner */
 #wordToFindDiv {
     font-size: 1.5em;
     letter-spacing: 6px;
@@ -94,18 +84,14 @@ main h2 {
     text-shadow: 1px 1px 3px #000;
 }
 
-/* Compteur d'erreurs */
 #cptErreur {
     font-size: 1.2em;
     color: #ff6347;
-    /* Rouge-orangé pour attirer l'attention */
     font-weight: bold;
     margin: 15px 0;
     text-shadow: 1px 1px 3px #000;
-    /* Ombre subtile pour plus de lisibilité */
 }
 
-/* Image du pendu */
 #imagePendu {
     background: url("img/sprite.jpg");
     width: 130px;
@@ -133,7 +119,6 @@ main h2 {
     background-position: -220px -250px;
 }
 
-/* Animation de secousse en cas d'erreur */
 @keyframes shake {
     0% {
         transform: translateX(0);
@@ -160,7 +145,6 @@ main h2 {
     animation: shake 0.5s;
 }
 
-/* Clavier virtuel */
 #KeyBoard {
     display: flex;
     flex-wrap: wrap;
@@ -178,10 +162,8 @@ main h2 {
     text-align: center;
     font-size: 1.1em;
     border: 2px solid #ff7518;
-    /* Bordure orange */
     border-radius: 5px;
     background-color: #666;
-    /* Gris moyen */
     color: #e0e0e0;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
@@ -196,7 +178,6 @@ main h2 {
     background-color: #0056b3;
 }
 
-/* Styles pour les écrans plus larges */
 @media (min-width: 768px) {
     main {
         padding: 20px;

@@ -36,7 +36,6 @@ body {
     width: 100%;
     height: auto;
     max-width: 600px;
-    /* Limite la largeur de l'image */
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     object-fit: cover;
@@ -109,26 +108,21 @@ body {
     }
 }
 
-/* Conteneur pour aligner le formulaire avec l'image */
 .content-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 600px;
-    /* Le conteneur prend toute la largeur possible, mais limitée */
     margin: 0 auto;
-    /* Centrage */
 }
 
-/* Aligne l'input et le bouton "Go" avec la largeur de l'image */
 .input-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 600px;
-    /* Prend la même largeur que l'image */
     margin: 10px auto;
     gap: 10px;
 }
@@ -156,7 +150,6 @@ body {
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
     line-height: normal;
-    /* Centrer le texte à l'intérieur du bouton */
 }
 
 #checkPropalButton:hover {
@@ -215,7 +208,6 @@ body {
     }
 }
 
-/* Styles supplémentaires */
 .container {
     padding: 0;
     margin: 0;

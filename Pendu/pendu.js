@@ -23,14 +23,13 @@ let wordToFind;
 let wordToFindArray;
 let cptErreur = 0;
 let cptLettreTrouvees = 0;
-const maxErreurs = 4; // Nombre maximum d'erreurs avant de perdre
+const maxErreurs = 4;
 
 buttonPlay.addEventListener("click", function () {
     initGame();
 });
 
 function initGame() {
-    // Réinitialiser l'état du jeu
     Confetti.stopAnimationConfeti();
     cptErreur = 0;
     imgPendu.className = '';
@@ -45,7 +44,6 @@ function initGame() {
     let line = document.createElement("tr");
     line.id = "LineOfWord";
     wordToFindArray.forEach(letter => {
-        // Créer un TD (case du tableau) par lettre
         let td = document.createElement("td");
         td.dataset.letter = letter;
         td.textContent = "_";
@@ -69,7 +67,6 @@ function generateKeyBoard() {
 
         lettreDiv.addEventListener("click", () => {
             if (checkLetterInWord(letter)) {
-                // Afficher la lettre dans le mot masqué
                 let lineWord = document.getElementById("LineOfWord");
                 let allTdOfWord = lineWord.children;
                 Array.from(allTdOfWord).forEach(td => {
@@ -80,7 +77,6 @@ function generateKeyBoard() {
                 });
 
                 if (cptLettreTrouvees === wordToFindArray.length) {
-                    // Victoire
                     KeyBoardDiv.innerHTML = '';
                     cptErreurDiv.textContent = `Gagné, avec ${cptErreur} erreur(s)`;
                     Confetti.launchAnimationConfeti();
@@ -89,7 +85,6 @@ function generateKeyBoard() {
                     }, 5000);
                 }
             } else {
-                // Incrémenter le compteur d'erreur
                 cptErreur++;
                 cptErreurDiv.textContent = cptErreur;
                 imgPendu.className = '';
@@ -126,8 +121,6 @@ function generateWord() {
     return allWords[indexWord];
 }
 
-// Retourne true si la lettre est présente dans le mot
-// Retourne false si la lettre est absente du mot
 function checkLetterInWord(letter) {
     return wordToFindArray.includes(letter);
 }

@@ -1,7 +1,6 @@
 import { Confetti } from "../lib/confetti.js";
 import { Utils } from "../lib/Utils/utils.js";
 
-// Variables globales
 let NumberToFind = 0;
 const resultDiv = document.getElementById("resultDiv");
 const reboursDiv = document.getElementById("CompteARebours");
@@ -10,7 +9,6 @@ const playButton = document.getElementById("beginGame");
 let TempsRestant = 0;
 let compteurInterval = null;
 
-// Événements
 playButton.addEventListener("click", launchGame);
 document.getElementById("checkPropalButton").addEventListener("click", checkPropal);
 document.getElementById("userPropalInput").addEventListener("keyup", function (event) {
@@ -19,7 +17,6 @@ document.getElementById("userPropalInput").addEventListener("keyup", function (e
     }
 });
 
-// Fonctions
 function checkPropal() {
     const numberPropal = parseInt(document.getElementById("userPropalInput").value);
     if (isNaN(numberPropal)) {
@@ -56,7 +53,7 @@ function launchGame() {
     Confetti.stopAnimationConfeti();
     NumberToFind = Utils.getRandomInt(1000);
     TempsRestant = 30;
-    GamePropalDiv.style.display = "flex";  // 'block' remplacé par 'flex' pour être cohérent avec le CSS
+    GamePropalDiv.style.display = "flex";
     if (compteurInterval != null) {
         clearInterval(compteurInterval);
     }

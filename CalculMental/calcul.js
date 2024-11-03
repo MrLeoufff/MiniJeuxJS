@@ -20,8 +20,8 @@ const showPlayingDiv = document.querySelectorAll(".showPlayingDiv");
 const nbSecondsGameInput = document.getElementById("nbSecondsGame");
 const maxNumberCalcInput = document.getElementById("maxNumberCalc");
 
-let TempsMinuteurBase = 10; // Paramétrable
-let maxCalculNumber = 20; // Paramétrable
+let TempsMinuteurBase = 10;
+let maxCalculNumber = 20;
 let compteurInterval = null;
 let TempsRestant = 0;
 let calculEncours = null;
@@ -82,7 +82,7 @@ function launchGame() {
     allCalculRecap = "";
     cptGoodAnswer = 0;
     cptBadAnswer = 0;
-    messengerDiv.textContent = ""; // Vider le message précédent
+    messengerDiv.textContent = "";
     lancerMinuteur(TempsMinuteurBase);
     generateCalcul();
     displayPlayingDiv(true);
@@ -141,7 +141,6 @@ function lancerMinuteur(tempsMinuteurBase) {
         TempsRestant--;
         reboursDiv.textContent = TempsRestant;
 
-        // Ajouter un message dans la console pour vérifier si la classe est bien ajoutée
         if (TempsRestant <= 10) {
             reboursDiv.classList.add("blinking");
             console.log("Classe blinking ajoutée");
@@ -154,7 +153,6 @@ function lancerMinuteur(tempsMinuteurBase) {
             clearInterval(compteurInterval);
             displayPlayingDiv(false);
 
-            // Construction du message final
             const message = document.createElement('div');
             const goodAnswers = document.createElement('p');
             goodAnswers.textContent = `Bonne(s) réponse(s) : ${cptGoodAnswer}`;
@@ -171,12 +169,10 @@ function lancerMinuteur(tempsMinuteurBase) {
             ratio.textContent = `Ratio : ${pourcentageGoodAnswer}%`;
             message.appendChild(ratio);
 
-            // Ajouter le récapitulatif des calculs
             const recapDiv = document.createElement('div');
             recapDiv.innerHTML = allCalculRecap;
             message.appendChild(recapDiv);
 
-            // Afficher le message dans messengerDiv
             messengerDiv.textContent = '';
             messengerDiv.appendChild(message);
         }

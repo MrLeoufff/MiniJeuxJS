@@ -12,13 +12,11 @@ const messageBox = document.getElementById("messageBox");
 
 const progressBar = document.querySelector('.progress');
 
-// Initialise la partie en attachant l'événement au bouton de démarrage
 document.getElementById("startButton").addEventListener("click", () => {
     launchGame();
     updateProgressBar();
 });
 
-// Fonction principale pour lancer une nouvelle partie
 function launchGame() {
     setAleaColorTab();
     console.log("Combinaison à trouver : ", colorTabToFind);
@@ -31,7 +29,6 @@ function launchGame() {
     showMessage("Le jeu commence ! Préparez-vous, les neurones !");
 }
 
-// Vérifie la proposition actuelle par rapport à la combinaison secrète
 function checkProposition() {
     if (gameOver) return;
 
@@ -42,7 +39,6 @@ function checkProposition() {
     let cptBadPlace = 0;
     let colorToFindCopy = [...colorTabToFind];
 
-    // Vérifie les bonnes positions
     for (let i = 0; i < propal.length; i++) {
         if (propal[i] === colorToFindCopy[i]) {
             cptGoodPlace++;
@@ -51,7 +47,6 @@ function checkProposition() {
         }
     }
 
-    // Vérifie les bonnes couleurs en mauvaise position
     for (let i = 0; i < propal.length; i++) {
         if (propal[i] !== "foundInPropal") {
             let found = false;
@@ -66,12 +61,10 @@ function checkProposition() {
         }
     }
 
-    // Affiche le retour de la proposition
     let lineResponse = document.createElement("div");
     lineResponse.textContent = `Bon endroit : ${cptGoodPlace} | Mauvais endroit : ${cptBadPlace}`;
     allSelectDiv.appendChild(lineResponse);
 
-    // Condition de victoire
     if (cptGoodPlace === colorTabToFind.length) {
         gameOver = true;
         showMessage("Vous avez gagné ! Vous avez des super-pouvoirs 🧠 !");
@@ -81,18 +74,17 @@ function checkProposition() {
             resetGame("Bravo, vous avez gagné !");
         }, 5000);
     } else {
-        handleFailedAttempt(); // Diminue les tentatives restantes
+        handleFailedAttempt();
         if (attemptsRemaining > 0) {
-            generateLineSelect(); // Génère une nouvelle ligne si le jeu continue
+            generateLineSelect();
         }
     }
 }
 
-// Gère chaque tentative échouée et met à jour la barre de progression
 function handleFailedAttempt() {
     if (attemptsRemaining > 0) {
         attemptsRemaining--;
-        updateProgressBar(); // Met à jour la barre de progression
+        updateProgressBar();
 
         if (attemptsRemaining === 1) {
             showMessage("Dernière chance ! C'est le moment de devenir un génie...");
@@ -103,7 +95,6 @@ function handleFailedAttempt() {
         }
     }
 
-    // Condition de défaite
     if (attemptsRemaining === 0) {
         gameOver = true;
         resetGame("Vous avez perdu ! Plus de tentatives restantes.");
@@ -111,21 +102,18 @@ function handleFailedAttempt() {
     }
 }
 
-// Génère une nouvelle ligne de sélection
 function generateLineSelect() {
     if (gameOver) return;
 
     const lineContainer = document.createElement("div");
     lineContainer.classList.add("line-container");
 
-    // Crée une nouvelle ligne pour les sélecteurs de couleur
     let line = document.createElement("div");
     line.classList.add("select-line");
     for (let index = 0; index < nbColorToFind; index++) {
         generateSelect(line);
     }
 
-    // Bouton pour valider la proposition
     let btn = document.createElement("button");
     btn.textContent = "OK";
     btn.classList.add("btn-validate");
@@ -135,7 +123,6 @@ function generateLineSelect() {
     });
     lineContainer.appendChild(line);
 
-    // Barre de progression placée sous la ligne de sélecteurs
     const progressContainer = document.createElement("div");
     progressContainer.classList.add("progress-bar");
     const progress = document.createElement("div");
@@ -147,7 +134,6 @@ function generateLineSelect() {
     updateProgressBar();
 }
 
-// Génère un sélecteur de couleur pour chaque emplacement de la ligne
 function generateSelect(target) {
     let mySelect = document.createElement("select");
     colors.forEach(color => {
@@ -165,7 +151,6 @@ function generateSelect(target) {
     target.appendChild(mySelect);
 }
 
-// Génère une combinaison de couleurs aléatoires pour la partie
 function setAleaColorTab(size = nbColorToFind) {
     colorTabToFind = [];
     for (let index = 0; index < size; index++) {
@@ -173,13 +158,11 @@ function setAleaColorTab(size = nbColorToFind) {
     }
 }
 
-// Sélectionne une couleur aléatoire depuis le tableau des couleurs
 function getAleaColor() {
     let aleaIndex = Utils.getRandomInt(colors.length);
     return colors[aleaIndex];
 }
 
-// Fonction pour mettre à jour la barre de progression
 function updateProgressBar() {
     const progressBars = document.querySelectorAll('.progress');
     const currentProgressBar = progressBars[progressBars.length - 1];
@@ -187,7 +170,6 @@ function updateProgressBar() {
     currentProgressBar.style.width = `${progressPercentage}%`;
 }
 
-// Réinitialise le jeu avec un message de fin
 function resetGame(message) {
     alert(message);
     document.getElementById("startButton").disabled = false;
@@ -195,7 +177,6 @@ function resetGame(message) {
 }
 
 
-// Fonction pour afficher des messages
 function showMessage(message) {
     messageBox.textContent = message;
 }
