@@ -39,8 +39,25 @@ propalInput.addEventListener("keyup", event => {
     }
 });
 
+// function checkInputValue() {
+//     if (parseInt(propalInput.value) === calculEncours.result) {
+//         messengerDiv.textContent = "Bravo, vous avez trouvé !";
+//         cptGoodAnswer++;
+//         allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="goodAnswer">${propalInput.value}</span><br/>`;
+//     } else {
+//         messengerDiv.textContent = `Ce n'est pas le bon résultat : ${calculEncours.showCalculWithResult}`;
+//         cptBadAnswer++;
+//         allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="badAnswer">${propalInput.value}</span><br/>`;
+//     }
+//     propalInput.value = "";
+//     generateCalcul();
+// }
+
 function checkInputValue() {
-    if (parseInt(propalInput.value) === calculEncours.result) {
+    const isCorrect = parseInt(propalInput.value) === calculEncours.result;
+    showFeedback(isCorrect);
+
+    if (isCorrect) {
         messengerDiv.textContent = "Bravo, vous avez trouvé !";
         cptGoodAnswer++;
         allCalculRecap += `${calculEncours.showCalculWithResult} | <span class="goodAnswer">${propalInput.value}</span><br/>`;
@@ -76,6 +93,46 @@ function generateCalcul() {
     calculDiv.textContent = calculEncours.showCalcul;
 }
 
+// function lancerMinuteur(tempsMinuteurBase) {
+//     clearInterval(compteurInterval);
+//     TempsRestant = tempsMinuteurBase;
+//     reboursDiv.textContent = TempsRestant;
+//     compteurInterval = setInterval(() => {
+//         TempsRestant--;
+//         reboursDiv.textContent = TempsRestant;
+//         if (TempsRestant === 0) {
+//             clearInterval(compteurInterval);
+//             displayPlayingDiv(false);
+
+//             // Construction du message final
+//             const message = document.createElement('div');
+//             const goodAnswers = document.createElement('p');
+//             goodAnswers.textContent = `Bonne(s) réponse(s) : ${cptGoodAnswer}`;
+//             message.appendChild(goodAnswers);
+
+//             const badAnswers = document.createElement('p');
+//             badAnswers.textContent = `Mauvaise(s) réponse(s) : ${cptBadAnswer}`;
+//             message.appendChild(badAnswers);
+
+//             const totalQuestions = cptBadAnswer + cptGoodAnswer;
+//             const pourcentageGoodAnswer = (100 * cptGoodAnswer / totalQuestions).toFixed(2);
+
+//             const ratio = document.createElement('p');
+//             ratio.textContent = `Ratio : ${pourcentageGoodAnswer}%`;
+//             message.appendChild(ratio);
+
+//             // Ajouter le récapitulatif des calculs
+//             const recapDiv = document.createElement('div');
+//             recapDiv.innerHTML = allCalculRecap; // Utilisation sécurisée car allCalculRecap est construit avec du contenu contrôlé
+//             message.appendChild(recapDiv);
+
+//             // Afficher le message dans messengerDiv
+//             messengerDiv.textContent = ''; // Vider le contenu précédent
+//             messengerDiv.appendChild(message);
+//         }
+//     }, 1000);
+// }
+
 function lancerMinuteur(tempsMinuteurBase) {
     clearInterval(compteurInterval);
     TempsRestant = tempsMinuteurBase;
@@ -83,6 +140,16 @@ function lancerMinuteur(tempsMinuteurBase) {
     compteurInterval = setInterval(() => {
         TempsRestant--;
         reboursDiv.textContent = TempsRestant;
+
+        // Ajouter un message dans la console pour vérifier si la classe est bien ajoutée
+        if (TempsRestant <= 10) {
+            reboursDiv.classList.add("blinking");
+            console.log("Classe blinking ajoutée");
+        } else {
+            reboursDiv.classList.remove("blinking");
+            console.log("Classe blinking retirée");
+        }
+
         if (TempsRestant === 0) {
             clearInterval(compteurInterval);
             displayPlayingDiv(false);
@@ -106,11 +173,11 @@ function lancerMinuteur(tempsMinuteurBase) {
 
             // Ajouter le récapitulatif des calculs
             const recapDiv = document.createElement('div');
-            recapDiv.innerHTML = allCalculRecap; // Utilisation sécurisée car allCalculRecap est construit avec du contenu contrôlé
+            recapDiv.innerHTML = allCalculRecap;
             message.appendChild(recapDiv);
 
             // Afficher le message dans messengerDiv
-            messengerDiv.textContent = ''; // Vider le contenu précédent
+            messengerDiv.textContent = '';
             messengerDiv.appendChild(message);
         }
     }, 1000);
@@ -149,5 +216,16 @@ class Calcul {
 
     #getRandomInt(max) {
         return Math.floor(Math.random() * max);
+    }
+}
+
+function showFeedback(isCorrect) {
+    const feedbackElement = document.getElementById("feedback");
+    if (isCorrect) {
+        feedbackElement.textContent = "Bien joué ! Continuez comme ça ! 💪";
+        feedbackElement.classList.remove("bad");
+    } else {
+        feedbackElement.textContent = "Essayez encore, vous pouvez y arriver !";
+        feedbackElement.classList.add("bad");
     }
 }

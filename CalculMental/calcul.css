@@ -1,16 +1,172 @@
-#minuteur{
-    font-size: 25px;
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.rules {
+    background-color: #e8f5e9;
+    border: 1px solid #4CAF50;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.rules h2 {
+    color: #4CAF50;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.rules p {
+    margin: 5px 0;
+}
+
+
+h1 {
+    color: #4CAF50;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/* Conteneur principal pour centrer le contenu */
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Style pour les champs de saisie et les boutons */
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="number"] {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styles spécifiques au minuteur et aux réponses */
+#minuteur {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #16b12b;
+    margin-top: 20px;
+}
+
+@keyframes blink {
+    0% {
+        color: #fffb22;
+    }
+
+    50% {
+        color: red;
+    }
+
+    100% {
+        color: #fffb22;
+    }
+}
+
+.blinking {
+    animation: blink 1s infinite;
+}
+
+.goodAnswer {
+    color: green;
     font-weight: bold;
 }
 
-.showPlayingDiv{
-    display: none;
+.badAnswer {
+    color: red;
+    font-weight: bold;
 }
 
-.goodAnswer{
-    color:green;
+/* Alignement des éléments du jeu */
+.showPlayingDiv,
+#messenger {
+    margin-top: 15px;
 }
 
-.badAnswer{
-    color:red;
+/* Style pour le bouton "Home" */
+.btn-home {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+.btn-home:hover {
+    background-color: #0056b3;
+}
+
+.feedback {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.feedback.bad {
+    color: red;
+}
+
+
+/* Media Query pour écrans plus larges */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 30px;
+    }
+
+    button {
+        width: auto;
+        padding: 10px 20px;
+    }
+
+    .btn-home {
+        padding: 10px 20px;
+    }
 }
