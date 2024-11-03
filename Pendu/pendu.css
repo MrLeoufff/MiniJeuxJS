@@ -1,48 +1,235 @@
-main{
-    max-width: 500px;
-    margin:auto; 
-}
-
-table{
-    width: 100%;
+/* Style global */
+body {
+    font-family: 'Creepster', cursive, Arial, sans-serif;
+    background-color: #2e2e2e;
+    color: #f5f5f5;
     text-align: center;
-    font-size: 50px;
-}
-
-#KeyBoard{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-#KeyBoard .letterKeyBoard{
-    width: 50px;
-    height: 30px;
     padding: 10px;
-    text-align: center;
-    border: 1px solid gray;
-    margin: 2px;
+    margin: 0;
 }
 
-#imagePendu{
+main {
+    max-width: 500px;
+    margin: auto;
+    padding: 15px;
+    background-color: #3b3b3b;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid #ff7518;
+    text-align: center;
+}
+
+/* Centrage du bouton "Home" sous le conteneur principal */
+.btn-home {
+    display: inline-block;
+    background-color: #ff7518;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Pour placer le bouton "Home" en dessous du conteneur */
+.btn-home-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Titre */
+main h1 {
+    color: #ff7518;
+    font-size: 1.8em;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 5px #000;
+}
+
+/* Sous-titre */
+main h2 {
+    color: #f5f5f5;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Bouton de démarrage */
+#beginGame {
+    background-color: #ff7518;
+    /* Couleur orange */
+    color: #2c2c2c;
+    /* Texte sombre */
+    border: none;
+    padding: 8px 16px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 20px auto;
+    /* Centrage avec auto */
+    display: block;
+    /* Affichage en bloc pour le centrage */
+}
+
+#beginGame:hover {
+    background-color: #cc5e00;
+    /* Couleur orange foncée */
+    transform: scale(1.05);
+}
+
+/* Mot à deviner */
+#wordToFindDiv {
+    font-size: 1.5em;
+    letter-spacing: 6px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #4c4c4c;
+    border: 2px dashed #ff7518;
+    border-radius: 5px;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Compteur d'erreurs */
+#cptErreur {
+    font-size: 1.2em;
+    color: #ff6347;
+    /* Rouge-orangé pour attirer l'attention */
+    font-weight: bold;
+    margin: 15px 0;
+    text-shadow: 1px 1px 3px #000;
+    /* Ombre subtile pour plus de lisibilité */
+}
+
+/* Image du pendu */
+#imagePendu {
     background: url("img/sprite.jpg");
     width: 130px;
     height: 140px;
     margin: 15px auto;
 }
-#imagePendu.etat0{
+
+#imagePendu.etat0 {
     background-position: -20px -55px;
 }
-#imagePendu.etat1{
+
+#imagePendu.etat1 {
     background-position: -220px -55px;
 }
-#imagePendu.etat2{
+
+#imagePendu.etat2 {
     background-position: -410px -55px;
 }
-#imagePendu.etat3{
+
+#imagePendu.etat3 {
     background-position: -20px -250px;
 }
-#imagePendu.etat4{
+
+#imagePendu.etat4 {
     background-position: -220px -250px;
+}
+
+/* Animation de secousse en cas d'erreur */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.errorShake {
+    animation: shake 0.5s;
+}
+
+/* Clavier virtuel */
+#KeyBoard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+#KeyBoard .letterKeyBoard {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1em;
+    border: 2px solid #ff7518;
+    /* Bordure orange */
+    border-radius: 5px;
+    background-color: #666;
+    /* Gris moyen */
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#KeyBoard .letterKeyBoard:hover {
+    background-color: #ff7518;
+    color: #2c2c2c;
+}
+
+.btn-home:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour les écrans plus larges */
+@media (min-width: 768px) {
+    main {
+        padding: 20px;
+    }
+
+    #beginGame {
+        padding: 10px 20px;
+        font-size: 1.1em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #wordToFindDiv {
+        font-size: 1.8em;
+        padding: 12px;
+        letter-spacing: 8px;
+    }
+
+    #imagePendu {
+        width: 130px;
+        height: 140px;
+    }
+
+    #KeyBoard .letterKeyBoard {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2em;
+    }
+
+    .btn-home {
+        font-size: 1.1em;
+        padding: 10px 20px;
+    }
 }
