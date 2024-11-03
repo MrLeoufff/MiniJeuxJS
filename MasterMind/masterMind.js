@@ -119,3 +119,32 @@ function getAleaColor() {
     let aleaIndex = Utils.getRandomInt(colors.length);
     return colors[aleaIndex];
 }
+
+// Variables pour gérer les tentatives
+const maxAttempts = 10; // Nombre maximum de tentatives
+let attemptsRemaining = maxAttempts;
+
+// Sélection de l'élément de la barre de progression
+const progressBar = document.querySelector('.progress');
+
+// Fonction pour mettre à jour la barre de progression
+function updateProgressBar() {
+    // Calcul de la largeur en pourcentage basée sur les tentatives restantes
+    const progressPercentage = (attemptsRemaining / maxAttempts) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+}
+
+// Appeler cette fonction à chaque tentative échouée
+function handleFailedAttempt() {
+    if (attemptsRemaining > 0) {
+        attemptsRemaining--;
+        updateProgressBar(); // Met à jour la barre de progression
+    }
+
+    // Vérifie si le joueur a épuisé ses tentatives
+    if (attemptsRemaining === 0) {
+        alert("Vous avez perdu ! Plus de tentatives restantes.");
+        // Ici, vous pouvez réinitialiser le jeu ou afficher un message de fin
+    }
+}
+
