@@ -10,6 +10,7 @@ body {
     text-align: center;
     padding: 10px;
     margin: 0;
+    padding-top: 20px;
 }
 
 /* Titre principal */
@@ -17,6 +18,7 @@ h1 {
     color: #00e5ff;
     animation: glow 3s ease-in-out infinite;
     text-shadow: 0px 0px 8px #00e5ff, 0px 0px 15px #6a00ff;
+    margin-top: 30px;
 }
 
 @keyframes glow {
@@ -48,27 +50,65 @@ main {
     text-align: center;
 }
 
+/* Conteneur de chaque ligne de sélection avec barre de progression */
+.line-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Ligne des sélecteurs de couleur */
+.select-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* Bouton de validation */
+.btn-validate {
+    background-color: #6a00ff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-validate:hover {
+    background-color: #00e5ff;
+}
+
+/* Barre de progression */
 .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     background-color: #333;
+    height: 10px;
+    z-index: 1000;
     border-radius: 10px;
     overflow: hidden;
-    height: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
 }
 
 .progress {
     width: 100%;
-    background-color: #00e5ff;
+    /* Commence à 100% et diminue avec les tentatives */
+    background: linear-gradient(90deg, #00e5ff, #6a00ff);
     height: 100%;
-    transition: width 0.5s;
+    transition: width 0.4s ease;
+    box-shadow: 0px 0px 10px #00e5ff, 0px 0px 20px #6a00ff;
 }
+
 
 
 /* Bouton de démarrage */
 #startButton {
     background-color: #6a00ff;
-    /* Violet néon */
     color: #e0e0e0;
     border: none;
     padding: 10px 20px;
@@ -82,7 +122,6 @@ main {
 
 #startButton:hover {
     background-color: #00e5ff;
-    /* Passe au bleu néon au survol */
     box-shadow: 0px 0px 10px #00e5ff, 0px 0px 20px #6a00ff;
 }
 
@@ -123,6 +162,21 @@ select option {
     margin-top: 20px;
 }
 
+.message-box {
+    margin: 20px;
+    font-size: 1.2em;
+    color: #00e5ff;
+    text-shadow: 0px 0px 5px #6a00ff;
+    padding: 10px;
+    border: 1px solid #00e5ff;
+    border-radius: 8px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #1a1a1a;
+    box-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
+}
+
 /* Bouton de retour */
 .btn-home {
     display: inline-block;
@@ -145,6 +199,11 @@ select option {
 
 /* Styles pour les écrans plus larges */
 @media (min-width: 768px) {
+    .progress-bar {
+        height: 8px;
+        /* Réduit légèrement la hauteur sur mobile */
+    }
+
     h1 {
         font-size: 2.5em;
     }
